@@ -1,0 +1,51 @@
+:root {
+    --primary: #84cc16; /* Lime */
+    --bg-gradient: linear-gradient(135deg, #ecfccb, #d9f99d, #bef264);
+}
+
+.tts-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 20px;
+    border-radius: 16px;
+    border: 2px solid #ccc;
+    font-family: 'Kantumruy Pro', sans-serif;
+    font-size: 1.5rem;
+    resize: vertical;
+    box-shadow: inset 0 4px 6px rgba(0,0,0,0.05);
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    background: rgba(255,255,255,0.5);
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: bold;
+}
+
+.input-group input[type="range"] {
+    width: 200px;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}

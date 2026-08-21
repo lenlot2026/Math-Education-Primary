@@ -1,0 +1,17 @@
+/* Overrides for Clock Game */
+:root {
+    --primary: #f59e0b; /* Amber */
+    --secondary: #3b82f6;
+    --bg-gradient: linear-gradient(135deg, #fef3c7, #fde68a, #fcd34d);
+}
+
+.clock-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+}
+
+.text-option {
+    font-size: 1.5rem !important;
+}

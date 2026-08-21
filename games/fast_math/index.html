@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>បូកដកលេខរហ័ស - Fast Math</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="btn-back">⬅️ ត្រលប់ក្រោយ (Back)</a>
+            <h1>បូកដកលេខរហ័ស ⚡</h1>
+            <p>គិតលេខឱ្យលឿនមុនពេលអស់ម៉ោង</p>
+        </header>
+
+        <main class="game-area">
+            <div class="status-bar">
+                <div class="score">ពិន្ទុ: <span id="score">០</span></div>
+                <div class="timer">ម៉ោង: <span id="time">៣០</span> វិនាទី</div>
+            </div>
+
+            <div id="start-screen" class="screen active">
+                <button id="btn-start" class="btn-large">ចាប់ផ្តើមលេង (Start)</button>
+            </div>
+
+            <div id="play-screen" class="screen">
+                <div class="equation-box">
+                    <span id="num1">?</span>
+                    <span id="operator">+</span>
+                    <span id="num2">?</span>
+                    <span>=</span>
+                    <span class="question-mark">?</span>
+                </div>
+                
+                <div class="options-grid">
+                    <button class="option-btn" data-index="0">?</button>
+                    <button class="option-btn" data-index="1">?</button>
+                    <button class="option-btn" data-index="2">?</button>
+                    <button class="option-btn" data-index="3">?</button>
+                </div>
+            </div>
+
+            <div id="end-screen" class="screen">
+                <h2>ចប់ម៉ោង!</h2>
+                <p>ពិន្ទុរបស់អ្នកគឺ៖ <span id="final-score">០</span></p>
+                <button id="btn-restart" class="btn-large">លេងម្តងទៀត (Play Again)</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+<script src="../../js/confetti.min.js"></script>
+<script src="../../js/audio.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>រៀនប្រភាគ - Learn Fractions</title>
+    <!-- Google Fonts: Kantumruy Pro & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="btn-back">⬅️ ត្រលប់ក្រោយ (Back)</a>
+            <h1>រៀនប្រភាគ 🍕</h1>
+            <p>ឧបករណ៍អប់រំគណិតវិទ្យាដ៏សប្បាយរីករាយ</p>
+        </header>
+
+        <nav class="mode-tabs">
+            <button id="tab-learn" class="tab-btn active" onclick="switchMode('learn')">📖 របៀបរៀន (Learn)</button>
+            <button id="tab-quiz" class="tab-btn" onclick="switchMode('quiz')">🎮 របៀបលេង (Quiz)</button>
+        </nav>
+
+        <main class="content-area">
+            <!-- របៀបរៀន (Learn Mode) -->
+            <section id="mode-learn" class="mode-section active">
+                <div class="controls-panel card">
+                    <h2>កំណត់ប្រភាគ (Set Fraction)</h2>
+                    <div class="fraction-display">
+                        <span id="learn-num-val" class="num-text">1</span>
+                        <hr>
+                        <span id="learn-den-val" class="den-text">2</span>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label for="slider-numerator">ភាគយក (Numerator): <span id="label-num">1</span></label>
+                        <input type="range" id="slider-numerator" min="1" max="2" value="1">
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label for="slider-denominator">ភាគបែង (Denominator): <span id="label-den">2</span></label>
+                        <input type="range" id="slider-denominator" min="2" max="16" value="2">
+                    </div>
+                </div>
+
+                <div class="visuals-panel card">
+                    <div class="visual-container">
+                        <h3>នំខេក (Pie)</h3>
+                        <svg id="learn-pie" viewBox="-1 -1 2 2"></svg>
+                    </div>
+                    <div class="visual-container">
+                        <h3>របារ (Bar)</h3>
+                        <div id="learn-bar" class="fraction-bar"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- របៀបលេង (Quiz Mode) -->
+            <section id="mode-quiz" class="mode-section hidden">
+                <div class="quiz-panel card">
+                    <div class="quiz-header">
+                        <h2>ការប្រកួតប្រភាគ (Fraction Challenge)</h2>
+                        <button id="btn-next-quiz" class="btn-secondary" onclick="generateQuiz()">សំណួរថ្មី 🔄</button>
+                    </div>
+                    
+                    <div class="quiz-prompt">
+                        <p>ចូរលាបពណ៌ឱ្យត្រូវនឹងប្រភាគខាងក្រោម៖</p>
+                        <div class="target-fraction">
+                            <span id="quiz-target-num">3</span>
+                            <hr>
+                            <span id="quiz-target-den">4</span>
+                        </div>
+                    </div>
+
+                    <div class="quiz-shape-selector">
+                        <label><input type="radio" name="quiz-shape" value="pie" checked onchange="updateQuizShape()"> រង្វង់ (Pie)</label>
+                        <label><input type="radio" name="quiz-shape" value="bar" onchange="updateQuizShape()"> របារ (Bar)</label>
+                    </div>
+
+                    <div class="quiz-interactive-area">
+                        <svg id="quiz-pie" viewBox="-1 -1 2 2" class="interactive"></svg>
+                        <div id="quiz-bar" class="fraction-bar interactive hidden"></div>
+                    </div>
+
+                    <div class="quiz-actions">
+                        <button id="btn-verify" class="btn-primary" onclick="verifyQuiz()">ផ្ទៀងផ្ទាត់ (Check)</button>
+                    </div>
+                    
+                    <div id="quiz-feedback" class="feedback-msg"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+<script src="../../js/confetti.min.js"></script>
+<script src="../../js/audio.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ផ្គូផ្គងរូបភាពនិងពាក្យ - Picture Matching</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../fast_math/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="btn-back">⬅️ ត្រលប់ក្រោយ (Back)</a>
+            <h1 style="color: #10b981;">ផ្គូផ្គងរូបភាពនិងពាក្យ 🖼️</h1>
+            <p>ជ្រើសរើសពាក្យឱ្យត្រូវនឹងរូបភាព</p>
+        </header>
+
+        <main class="game-area">
+            <div class="status-bar">
+                <div class="score">ពិន្ទុ: <span id="score">០</span></div>
+                <div class="timer">សំណួរទី: <span id="question-num">១</span>/១០</div>
+            </div>
+
+            <div id="start-screen" class="screen active">
+                <button id="btn-start" class="btn-large" style="background: #10b981;">ចាប់ផ្តើមលេង (Start)</button>
+            </div>
+
+            <div id="play-screen" class="screen">
+                <div class="picture-box">
+                    <span id="main-picture">🐶</span>
+                </div>
+                
+                <div class="options-grid">
+                    <button class="option-btn text-option" data-index="0">ឆ្កែ</button>
+                    <button class="option-btn text-option" data-index="1">ឆ្មា</button>
+                    <button class="option-btn text-option" data-index="2">គោ</button>
+                    <button class="option-btn text-option" data-index="3">ជ្រូក</button>
+                </div>
+            </div>
+
+            <div id="end-screen" class="screen">
+                <h2 style="color: #10b981;">លេងចប់ហើយ!</h2>
+                <p>ពិន្ទុរបស់អ្នកគឺ៖ <span id="final-score">០</span> / ១០</p>
+                <button id="btn-restart" class="btn-large" style="background: #10b981;">លេងម្តងទៀត</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+<script src="../../js/confetti.min.js"></script>
+<script src="../../js/audio.js"></script>
+</body>
+</html>

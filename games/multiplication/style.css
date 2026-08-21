@@ -1,0 +1,6 @@
+/* Overrides for Multiplication Game */
+:root {
+    --primary: #8b5cf6; /* Purple */
+    --secondary: #ec4899;
+    --bg-gradient: linear-gradient(135deg, #ede9fe, #ddd6fe, #c4b5fd);
+}

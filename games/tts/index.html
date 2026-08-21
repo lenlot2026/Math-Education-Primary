@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>អានអត្ថបទ - Text to Speech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../fast_math/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container" style="max-width: 800px;">
+        <header class="app-header">
+            <a href="../../index.html" class="btn-back">⬅️ ត្រលប់ក្រោយ (Back)</a>
+            <h1 style="color: #84cc16;">ម៉ាស៊ីនអានអត្ថបទ 🔊</h1>
+            <p>វាយអត្ថបទរបស់អ្នក ហើយឱ្យកម្មវិធីអានជាសំឡេង</p>
+        </header>
+
+        <main class="tts-area">
+            <textarea id="text-input" rows="8" placeholder="សូមវាយអត្ថបទនៅទីនេះ... (Please type your text here...)"></textarea>
+            
+            <div class="settings">
+                <div class="input-group">
+                    <label>ល្បឿនអាន (Speed):</label>
+                    <input type="range" id="rate-input" min="0.5" max="2" value="1" step="0.1">
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="btn-speak" class="btn-large" style="background: #84cc16;">🗣️ អានឥឡូវនេះ (Speak)</button>
+                <button id="btn-stop" class="btn-large" style="background: #ef4444;">🛑 ឈប់ (Stop)</button>
+            </div>
+            
+            <p style="color: #64748b; font-size: 0.9rem; text-align: center; margin-top: 20px;">
+                *បញ្ជាក់៖ មុខងារអានភាសាខ្មែរអាស្រ័យលើប្រភេទឧបករណ៍ និងកម្មវិធី Browser របស់អ្នក (ទាមទារការគាំទ្រភាសាខ្មែរពីប្រព័ន្ធ)។ ប្រសិនបើមិនដំណើរការ សូមសាកល្បងវាយអក្សរអង់គ្លេស។
+            </p>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+<script src="../../js/confetti.min.js"></script>
+<script src="../../js/audio.js"></script>
+</body>
+</html>

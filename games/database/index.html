@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ឃ្លាំងទិន្នន័យសិស្ស - Student Database</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../fast_math/style.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- SheetJS Library for Excel Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="app-container" style="max-width: 1000px; width: 100%;">
+        <header class="app-header">
+            <a href="../../index.html" class="btn-back">⬅️ ត្រលប់ក្រោយ (Back)</a>
+            <h1 style="color: #64748b;">ឃ្លាំងទិន្នន័យសិស្ស 🗄️</h1>
+            <p>បញ្ចូលទិន្នន័យសិស្ស និងទាញយកជាឯកសារ Excel រក្សាទុកក្នុងម៉ាស៊ីន</p>
+        </header>
+
+        <main class="database-area">
+            <div class="form-card">
+                <h3>បញ្ចូលព័ត៌មានថ្មី (Add New Record)</h3>
+                <form id="student-form" class="student-form">
+                    <div class="form-group">
+                        <label>ឈ្មោះសិស្ស (Name):</label>
+                        <input type="text" id="input-name" required placeholder="ឧ. សុខ មករា">
+                    </div>
+                    <div class="form-group">
+                        <label>ភេទ (Gender):</label>
+                        <select id="input-gender">
+                            <option value="ប្រុស">ប្រុស (Male)</option>
+                            <option value="ស្រី">ស្រី (Female)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>ថ្ងៃខែឆ្នាំកំណើត (DOB):</label>
+                        <input type="date" id="input-dob">
+                    </div>
+                    <div class="form-group">
+                        <label>ចំណាំ/ពិន្ទុ (Note/Score):</label>
+                        <input type="text" id="input-note" placeholder="ឧ. ពូកែគណិត">
+                    </div>
+                    <button type="submit" class="btn-large" style="background: #3b82f6; width: auto;">➕ បន្ថែម</button>
+                </form>
+            </div>
+
+            <div class="table-card">
+                <div class="table-header">
+                    <h3>បញ្ជីឈ្មោះសិស្ស (Student List)</h3>
+                    <div class="action-buttons">
+                        <button id="btn-template" class="btn-tool" style="background: #e2e8f0; color: #475569; padding: 10px 15px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; font-weight: bold; margin-right: 10px;">📋 ទាញយកគំរូ (Template)</button>
+                        
+                        <label for="btn-import" class="btn-import">📂 បញ្ចូលពី Excel (Import)</label>
+                        <input type="file" id="btn-import" accept=".xlsx, .xls" class="hidden">
+                        
+                        <button id="btn-export" class="btn-export">💾 បង្កើតឃ្លាំង (Export)</button>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table id="data-table">
+                        <thead>
+                            <tr>
+                                <th>លេខ (ID)</th>
+                                <th>ឈ្មោះ (Name)</th>
+                                <th>ភេទ (Gender)</th>
+                                <th>ថ្ងៃខែឆ្នាំកំណើត (DOB)</th>
+                                <th>ចំណាំ (Note)</th>
+                                <th>សកម្មភាព (Action)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Rows injected here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="empty-state" class="empty-state hidden">មិនទាន់មានទិន្នន័យទេ</div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+<script src="../../js/confetti.min.js"></script>
+<script src="../../js/audio.js"></script>
+</body>
+</html>

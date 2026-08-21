@@ -1,0 +1,25 @@
+/* Overrides for Even/Odd Game */
+:root {
+    --primary: #06b6d4; /* Cyan */
+    --secondary: #ec4899;
+    --bg-gradient: linear-gradient(135deg, #cffafe, #a5f3fc, #67e8f9);
+}
+
+.number-box {
+    font-size: 8rem;
+    font-weight: bold;
+    color: var(--primary);
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    text-shadow: 2px 2px 0px #fff;
+    font-family: 'Outfit', sans-serif;
+}
+
+.two-cols {
+    grid-template-columns: 1fr 1fr;
+}
+
+.text-option {
+    font-size: 1.5rem !important;
+}

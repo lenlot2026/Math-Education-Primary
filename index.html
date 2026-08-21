@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ថ្នាលគណិតវិទ្យាកម្រិតបឋមសិក្សា</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <!-- PptxGenJS for PowerPoint generation -->
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/libs/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.min.js"></script>
+
+    <style>
+        /* CSS សម្រាប់លាក់ប៊ូតុងថយក្រោយ ពេលនៅទំព័រដើម (Home) និង ទំព័រ Login */
+        body:has(#screen-home.active) #global-back-btn,
+        body:has(#screen-login.active) #global-back-btn {
+            display: none !important;
+        }
+        
+        /* លាក់ទំព័រ Login មិនឱ្យលោតចេញមកកូរពេលកំពុងកែប្រែ */
+        #screen-login {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app-container">
+    
+    <!-- Top Bar -->
+    <div id="main-top-bar" class="top-bar" style="display: flex;">
+        <div class="brand" onclick="navigate('screen-home')" style="cursor: pointer;">
+            <img src="img/logo.png" alt="Logo" style="width: 70px; height: 50px; object-fit: contain; background: white; padding: 4px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+            <div class="brand-text">
+                <h1>ថ្នាលគណិតវិទ្យាកម្រិតបឋមសិក្សា</h1>
+                <p>កម្មវិធីសិក្សា និងបង្កើតវិញ្ញាសា</p>
+            </div>
+        </div>
+        <div class="user-stats" style="display: flex; align-items: center; gap: 10px;">
+            <div class="stat-pill">🪙 <span id="user-coins">180</span></div>
+            <div class="stat-pill">⭐ <span id="user-stars">54</span></div>
+            <div class="user-profile" onclick="if(confirm('តើអ្នកពិតជាចង់ចាកចេញពីប្រព័ន្ធ (Logout) មែនទេ?')) logout()">
+                <span>👦</span> <span id="user-name">ឡេន ឡូត (Owner)</span>
+            </div>
+            
+            <button id="global-back-btn" onclick="handleGlobalBack()" style="background: rgba(255, 255, 255, 0.25); border: 2px solid rgba(255, 255, 255, 0.5); color: white; padding: 8px 18px; border-radius: 20px; font-family: inherit; font-size: 1rem; font-weight: bold; cursor: pointer; margin-left: 10px; backdrop-filter: blur(4px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;">
+                <span style="font-size: 1.1rem;">⬅️</span> ថយក្រោយ
+            </button>
+        </div>
+    </div>
+
+    <!-- Screen 0: Login Screen -->
+    <section id="screen-login" class="view-section" style="justify-content: center; align-items: center; background: #F8FAFC;">
+    </section>
+
+    <!-- Screen: Main Menu (Home) -->
+    <section id="screen-home" class="view-section active">
+        <h2 class="section-title">សូមស្វាគមន៍! តើអ្នកចង់ទៅកាន់ទីណា? 🌟</h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 600px; margin: 0 auto; margin-top: 20px;">
+            <div onclick="navigate('screen-remedial')" style="background: linear-gradient(135deg, #10B981, #059669); color: white; padding: 30px; border-radius: 16px; text-align: center; cursor: pointer; box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3); transition: transform 0.2s;">
+                <h2 style="margin-bottom: 10px; font-size: 2rem; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 5px;">
+                        <img src="img/book1.png" style="height: 35px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                        <img src="img/book2.png" style="height: 35px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                        <img src="img/book3.png" style="height: 35px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                    </div>
+                    ចូលសិក្សាកម្រិតថ្នាក់ពន្លឿន
+                </h2>
+                <p style="opacity: 0.9; font-size: 1.1rem;">(Remedial School) កម្មវិធីបំប៉ន និងពន្លឿនការរៀនសូត្រ</p>
+            </div>
+            <div onclick="navigate('screen-grade')" style="background: linear-gradient(135deg, #3B82F6, #2563EB); color: white; padding: 30px; border-radius: 16px; text-align: center; cursor: pointer; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3); transition: transform 0.2s;">
+                <h2 style="margin-bottom: 10px; font-size: 2rem;">📚 ជ្រើសរើសកម្រិតថ្នាក់សិក្សា</h2>
+                <p style="opacity: 0.9; font-size: 1.1rem;">មេរៀន វិញ្ញាសា និងលំហាត់សម្រាប់ថ្នាក់ទី ១ ដល់ទី ៦</p>
+            </div>
+            <div onclick="navigate('screen-games')" style="background: linear-gradient(135deg, #F43F5E, #E11D48); color: white; padding: 30px; border-radius: 16px; text-align: center; cursor: pointer; box-shadow: 0 8px 20px rgba(225, 29, 72, 0.3); transition: transform 0.2s;">
+                <h2 style="margin-bottom: 10px; font-size: 2rem;">🎮 មជ្ឈមណ្ឌលល្បែងសិក្សា</h2>
+                <p style="opacity: 0.9; font-size: 1.1rem;">កន្លែងប្រមូលផ្តុំហ្គេម និងលំហាត់គណិតវិទ្យា</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen: Remedial -->
+    <section id="screen-remedial" class="view-section">
+        <h2 class="section-title" style="margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            ថ្នាក់ពន្លឿន (Remedial) 
+            <div style="display: flex; gap: 5px;">
+                <img src="img/book1.png" style="height: 35px; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">
+                <img src="img/book2.png" style="height: 35px; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">
+                <img src="img/book3.png" style="height: 35px; border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">
+            </div>
+        </h2>
+        
+        <div class="grade-grid">
+            <div class="grade-card" onclick="selectRemedial(1)">
+                <img src="img/book1.png" alt="សៀវភៅឆ្នាំទី១" style="height: 90px; width: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 15px;">
+                <div class="grade-icon bg-g1">១</div>
+                <h3>ថ្នាក់ពន្លឿន ឆ្នាំទី ១</h3>
+                <p>មេរៀនបំប៉នគ្រឹះ (ចំនួន វិធីបូក ដក គុណ ចែក និងរូបិយវត្ថុ)</p>
+            </div>
+            <div class="grade-card" onclick="selectRemedial(2)">
+                <img src="img/book2.png" alt="សៀវភៅឆ្នាំទី២" style="height: 90px; width: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 15px;">
+                <div class="grade-icon bg-g2">២</div>
+                <h3>ថ្នាក់ពន្លឿន ឆ្នាំទី ២</h3>
+                <p>មេរៀនបំប៉នកម្រិតមធ្យម (ទម្ងន់ ប្រវែង ប្រភាគ ទសភាគ និងមុំ)</p>
+            </div>
+            <div class="grade-card" onclick="selectRemedial(3)">
+                <img src="img/book3.png" alt="សៀវភៅឆ្នាំទី៣" style="height: 90px; width: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 15px;">
+                <div class="grade-icon bg-g3">៣</div>
+                <h3>ថ្នាក់ពន្លឿន ឆ្នាំទី ៣</h3>
+                <p>មេរៀនបំប៉នកម្រិតខ្ពស់ (ចំនួនចម្រុះ ភាគរយ មាឌ និងស្ថិតិ)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen 1: Grade Selection -->
+    <section id="screen-grade" class="view-section">
+        <h2 class="section-title">សូមជ្រើសរើសកម្រិតថ្នាក់ 🎒</h2>
+        <div class="grade-grid">
+            <div class="grade-card" onclick="selectGrade(1)">
+                <img src="img/math1.png" alt="គណិតវិទ្យា ថ្នាក់ទី១" style="height: 90px; width: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 15px;">
+                <div class="grade-icon bg-g1">១</div>
+                <h3>ថ្នាក់ទី ១</h3>
+                <p>ចំនួន ១ ដល់ ១០០, ការបូក ដក សាមញ្ញ និងរូបរាង</p>
+            </div>
+            <div class="grade-card" onclick="selectGrade(2)">
+                <img src="img/math2.png" alt="គណិតវិទ្យា ថ្នាក់ទី២" style="height: 90px; width: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 15px;">
+                <div class="grade-icon bg-g2">២</div>
+                <h3>ថ្នាក់ទី ២</h3>
+                <p>ចំនួនដល់ ១០០០, មេលេខ ២ ដល់ ៥, ប្រវែង និងម៉ោង</p>
+            </div>
+            <div class="grade-card" onclick="selectGrade(3)">
+                <img src="img/math3.png" alt="គណិតវិទ្យា ថ្នាក់ទី៣" style="height: 90px; width: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 15px;">
+                <div class="grade-icon bg-g3">៣</div>
+                <h3>ថ្នាក់ទី ៣</h3>
+                <p>ចំនួនដល់ ១០០ ០០០, គុណ ចែក, ប្រភាគ និងផ្ទៃក្រឡា</p>
+            </div>
+            <div class="grade-card" onclick="selectGrade(4)">
+                <img src="img/math4.png" alt="គណិតវិទ្យា ថ្នាក់ទី៤" style="height: 90px; width: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 15px;">
+                <div class="grade-icon bg-g4">៤</div>
+                <h3>ថ្នាក់ទី ៤</h3>
+                <p>ចំនួនធំៗ, ប្រភាគ, ចំនួនទសភាគ និងធរណីមាត្រ</p>
+            </div>
+            <div class="grade-card" onclick="selectGrade(5)">
+                <img src="img/math5.png" alt="គណិតវិទ្យា ថ្នាក់ទី៥" style="height: 90px; width: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 15px;">
+                <div class="grade-icon bg-g5">៥</div>
+                <h3>ថ្នាក់ទី ៥</h3>
+                <p>ភាគរយ, មុំ, មាឌ និងស្ថិតិ</p>
+            </div>
+            <div class="grade-card" onclick="selectGrade(6)">
+                <img src="img/math6.png" alt="គណិតវិទ្យា ថ្នាក់ទី៦" style="height: 90px; width: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 15px;">
+                <div class="grade-icon bg-g6">៦</div>
+                <h3>ថ្នាក់ទី ៦</h3>
+                <p>សមាមាត្រ, ការប្រាក់, ក្រាប និងត្រៀមប្រឡង</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen: Games Hub (22 Mini Games) -->
+    <section id="screen-games" class="view-section">
+        <h2 class="section-title">មជ្ឈមណ្ឌលល្បែងសិក្សា 🎮</h2>
+        <div class="games-grid">
+            <a href="games/fast_math/index.html" class="game-card" style="--card-color: #3b82f6;">
+                <div class="game-icon">⚡</div>
+                <div class="game-info">
+                    <h2>១. គណិតរហ័ស</h2>
+                    <p>ល្បងល្បឿននៃការគណនាបូក ដក គុណ ចែក។</p>
+                </div>
+            </a>
+            <a href="games/memory/index.html"  class="game-card" style="--card-color: #10b981;">
+                <div class="game-icon">🧠</div>
+                <div class="game-info">
+                    <h2>២. ចងចាំគូ</h2>
+                    <p>បើកផ្ទាំងរូបភាពផ្គូផ្គងលេខ និងរូបរាង។</p>
+                </div>
+            </a>
+            <a href="games/flashcards/index.html"  class="game-card" style="--card-color: #f59e0b;">
+                <div class="game-icon">🗂️</div>
+                <div class="game-info">
+                    <h2>៣. បណ្ណរូបភាព</h2>
+                    <p>ទន្ទេញលេខ និងពាក្យគន្លឹះគណិតវិទ្យា។</p>
+                </div>
+            </a>
+            <a href="games/clock/index.html"  class="game-card" style="--card-color: #ec4899;">
+                <div class="game-icon">⏰</div>
+                <div class="game-info">
+                    <h2>៤. មើលនាឡិកា</h2>
+                    <p>រៀនមើលម៉ោង នាទី និងទ្រនិចនាឡិកា។</p>
+                </div>
+            </a>
+            <a href="games/fraction/index.html"  class="game-card" style="--card-color: #8b5cf6;">
+                <div class="game-icon">🍕</div>
+                <div class="game-info">
+                    <h2>៥. ប្រភាគរូបភាព</h2>
+                    <p>យល់ដឹងពីប្រភាគតាមរយៈចំណិតភីហ្សា។</p>
+                </div>
+            </a>
+            <a href="games/even_odd/index.html"  class="game-card" style="--card-color: #06b6d4;">
+                <div class="game-icon">🔢</div>
+                <div class="game-info">
+                    <h2>៦. លេខគូ លេខសេស</h2>
+                    <p>ញែកលេខគូ និងលេខសេសឱ្យបានត្រឹមត្រូវ។</p>
+                </div>
+            </a>
+            <a href="games/geometry/index.html"  class="game-card" style="--card-color: #f97316;">
+                <div class="game-icon">📐</div>
+                <div class="game-info">
+                    <h2>៧. រូបរាងធរណីមាត្រ</h2>
+                    <p>ស្គាល់រង្វង់ ការ៉េ ត្រីកោណ និងទ្រង់ទ្រាយផ្សេងៗ។</p>
+                </div>
+            </a>
+            <a href="games/currency/index.html"  class="game-card" style="--card-color: #14b8a6;">
+                <div class="game-icon">💵</div>
+                <div class="game-info">
+                    <h2>៨. រូបិយវត្ថុខ្មែរ</h2>
+                    <p>រាប់លុយ និងអាប់លុយរៀលខ្មែរ។</p>
+                </div>
+            </a>
+            <a href="games/hangman/index.html"  class="game-card" style="--card-color: #e11d48;">
+                <div class="game-icon">🎯</div>
+                <div class="game-info">
+                    <h2>៩. ទាយពាក្យគណិត</h2>
+                    <p>ស្វែងរកអក្សរដែលត្រូវនឹងពាក្យគណិតវិទ្យា។</p>
+                </div>
+            </a>
+            <a href="games/multiplication/index.html"  class="game-card" style="--card-color: #d97706;">
+                <div class="game-icon">✖️</div>
+                <div class="game-info">
+                    <h2>១០. តារាងមេលេខ</h2>
+                    <p>ហាត់រៀន និងប្រឡងមេលេខពី ២ ដល់ ១០។</p>
+                </div>
+            </a>
+            <a href="games/whiteboard/index.html"  class="game-card" style="--card-color: #6366f1;">
+                <div class="game-icon">✏️</div>
+                <div class="game-info">
+                    <h2>១១. ក្ដារខៀនគូររូប</h2>
+                    <p>គូររូប និងសរសេរព្រាងលំហាត់លើក្ដារ។</p>
+                </div>
+            </a>
+            <a href="games/scoreboard/index.html"  class="game-card" style="--card-color: #0284c7;">
+                <div class="game-icon">🏆</div>
+                <div class="game-info">
+                    <h2>១២. តារាងពិន្ទុ</h2>
+                    <p>កត់ត្រា និងប្រៀបធៀបពិន្ទុសិស្សក្នុងថ្នាក់។</p>
+                </div>
+            </a>
+            <a href="games/timer/index.html"  class="game-card" style="--card-color: #a855f7;">
+                <div class="game-icon">⏱️</div>
+                <div class="game-info">
+                    <h2>១៣. នាឡិការាប់ថយក្រោយ</h2>
+                    <p>កំណត់ម៉ោងសម្រាប់ធ្វើលំហាត់ក្នុងថ្នាក់។</p>
+                </div>
+            </a>
+            <a href="games/name_spinner/index.html"  class="game-card" style="--card-color: #ef4444;">
+                <div class="game-icon">🎡</div>
+                <div class="game-info">
+                    <h2>១៤. កងបង្វិលឈ្មោះ</h2>
+                    <p>បង្វិលកងចាប់ឈ្មោះសិស្សឡើងឆ្លើយសំណួរ។</p>
+                </div>
+            </a>
+            <a href="games/word_spinner/index.html"  class="game-card" style="--card-color: #f59e0b;">
+                <div class="game-icon">🎪</div>
+                <div class="game-info">
+                    <h2>១៥. កងបង្វិលពាក្យ</h2>
+                    <p>បង្វិលកងប្រធានបទ និងសំណួរផ្សេងៗ។</p>
+                </div>
+            </a>
+            <a href="games/group_maker/index.html"  class="game-card" style="--card-color: #10b981;">
+                <div class="game-icon">👥</div>
+                <div class="game-info">
+                    <h2>១៦. ចែកក្រុមស្វ័យប្រវត្តិ</h2>
+                    <p>បែងចែកសិស្សជាក្រុមដោយចៃដន្យ។</p>
+                </div>
+            </a>
+            <a href="games/random_number/index.html"  class="game-card" style="--card-color: #3b82f6;">
+                <div class="game-icon">🎲</div>
+                <div class="game-info">
+                    <h2>១៧. ចាប់លេខចៃដន្យ</h2>
+                    <p>ជ្រើសរើសលេខដោយចៃដន្យសម្រាប់លេងហ្គេម។</p>
+                </div>
+            </a>
+            <a href="games/word_scramble/index.html"  class="game-card" style="--card-color: #ec4899;">
+                <div class="game-icon">🔤</div>
+                <div class="game-info">
+                    <h2>១៨. តម្រៀបតួអក្សរ</h2>
+                    <p>រៀបចំតួអក្សរដែលច្របល់គ្នាឱ្យចេញជាពាក្យត្រឹមត្រូវ។</p>
+                </div>
+            </a>
+            <a href="games/match_pairs/index.html"  class="game-card" style="--card-color: #8b5cf6;">
+                <div class="game-icon">🔗</div>
+                <div class="game-info">
+                    <h2>១៩. ផ្គូផ្គងពាក្យ</h2>
+                    <p>ភ្ជាប់ពាក្យ និងនិយមន័យដែលត្រូវគ្នា។</p>
+                </div>
+            </a>
+            <a href="games/picture_matching/index.html"  class="game-card" style="--card-color: #06b6d4;">
+                <div class="game-icon">🖼️</div>
+                <div class="game-info">
+                    <h2>២០. ផ្គូផ្គងរូបភាព</h2>
+                    <p>អូសខ្សែភ្ជាប់ពាក្យទៅនឹងរូបភាព។</p>
+                </div>
+            </a>
+            <a href="games/tts/index.html"  class="game-card" style="--card-color: #84cc16;">
+                <div class="game-icon">🔊</div>
+                <div class="game-info">
+                    <h2>២១. អានអត្ថបទ</h2>
+                    <p>វាយអត្ថបទ ហើយឱ្យកម្មវិធីអានជាសំឡេង។</p>
+                </div>
+            </a>
+            <a href="games/database/index.html"  class="game-card full-width-card" style="--card-color: #64748b;">
+                <div class="game-icon">🗄️</div>
+                <div class="game-info">
+                    <h2>២២. ឃ្លាំងទិន្នន័យសិស្ស</h2>
+                    <p>គ្រប់គ្រងបញ្ជីឈ្មោះ និងទាញយកជា Excel។</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Screen 2: Topic (Content) Selection -->
+    <section id="screen-topic" class="view-section">
+        <h2 class="section-title" id="topic-title">មាតិកាមេរៀន (ថ្នាក់ទី ១) 📖</h2>
+        <div id="topic-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <!-- Dynamically injected -->
+        </div>
+    </section>
+
+    <!-- Screen 3: Game Area -->
+    <section id="screen-game" class="view-section">
+        <div style="display:flex; justify-content:space-between; margin-bottom: 20px; padding: 0 20px;">
+            <h3 id="game-title" style="color: #64748B;">ចំនួន និងប្រមាណវិធី</h3>
+            <span style="font-weight: bold;">ពិន្ទុ៖ <span id="game-score" style="color:#059669;">០</span></span>
+        </div>
+        
+        <div class="game-container" id="game-container">
+            <!-- Dynamic game logic -->
+        </div>
+    </section>
+
+</div>
+
+<script src="data/database.js"></script>
+<script>
+function renderLatex() {
+    if(window.renderMathInElement) {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });
+    }
+}
+
+// មុខងារបញ្ជាប៊ូតុងថយក្រោយថ្មី (Global Back Function)
+window.handleGlobalBack = function() {
+    const activeSection = document.querySelector('.view-section.active');
+    if (!activeSection) return;
+
+    if (activeSection.id === 'screen-game') {
+        navigate('screen-topic');
+    } else if (activeSection.id === 'screen-topic') {
+        if (typeof goBackFromTopic === 'function') {
+            goBackFromTopic();
+        } else {
+            navigate('screen-home');
+        }
+    } else {
+        navigate('screen-home');
+    }
+};
+
+// មុខងារ Bypass Login ស្វ័យប្រវត្តិសម្រាប់ Owner ពេលកំពុងបង្កើតកម្មវិធី
+setTimeout(() => {
+    const topBar = document.getElementById('main-top-bar');
+    if (topBar) topBar.style.display = 'flex';
+    
+    document.getElementById('screen-login').classList.remove('active');
+    document.getElementById('screen-home').classList.add('active');
+    
+    const originalNavigate = window.navigate;
+    if (typeof originalNavigate === 'function') {
+        window.navigate = function(id) {
+            if (id === 'screen-login') return; // បដិសេធដាច់ខាតមិនទៅ Login
+            originalNavigate(id);
+        };
+    }
+}, 500);
+</script>
+<script src="js/generator.js"></script>
+<script src="js/game-engine.js"></script>
+<script src="js/confetti.min.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

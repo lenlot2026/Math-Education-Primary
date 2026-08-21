@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ស្វែងរកគូ - Match Pairs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../fast_math/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="btn-back">⬅️ ត្រលប់ក្រោយ (Back)</a>
+            <h1 style="color: #ec4899;">ស្វែងរកគូ 🔗</h1>
+            <p>ចុចលើរូបភាព ួចចុចលើពាក្យដែលត្រូវគ្នា</p>
+        </header>
+
+        <main class="game-area">
+            <div class="status-bar">
+                <div class="score">ពិន្ទុ: <span id="score">០</span> / ៥</div>
+            </div>
+
+            <div id="start-screen" class="screen active">
+                <button id="btn-start" class="btn-large" style="background: #ec4899;">ចាប់ផ្តើមលេង (Start)</button>
+            </div>
+
+            <div id="play-screen" class="screen">
+                <div class="match-container">
+                    <div class="column" id="col-pics">
+                        <!-- Pics injected here -->
+                    </div>
+                    <div class="column" id="col-words">
+                        <!-- Words injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="end-screen" class="screen">
+                <h2 style="color: #ec4899;">អ្នកឈ្នះហើយ! 🎉</h2>
+                <button id="btn-restart" class="btn-large" style="background: #ec4899;">លេងម្តងទៀត</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+<script src="../../js/confetti.min.js"></script>
+<script src="../../js/audio.js"></script>
+</body>
+</html>

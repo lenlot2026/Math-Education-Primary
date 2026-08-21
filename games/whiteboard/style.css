@@ -1,0 +1,60 @@
+:root {
+    --primary: #f43f5e; /* Rose */
+    --bg-gradient: linear-gradient(135deg, #ffe4e6, #fecdd3, #fda4af);
+}
+
+.whiteboard-area {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    width: 100%;
+}
+
+.toolbar {
+    display: flex;
+    gap: 15px;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-tool {
+    background: #e2e8f0;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-tool:hover {
+    background: #cbd5e1;
+}
+
+.btn-tool.active {
+    background: var(--primary);
+    color: white;
+}
+
+.canvas-container {
+    width: 100%;
+    height: 60vh;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 10px 15px -3px rgba(0,0,0,0.1);
+    overflow: hidden;
+    touch-action: none; /* Prevent scrolling when drawing */
+}
+
+#drawing-canvas {
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+}

@@ -1,0 +1,34 @@
+/* Overrides for Hangman Game */
+:root {
+    --primary: #6366f1; /* Indigo */
+    --secondary: #ec4899;
+    --bg-gradient: linear-gradient(135deg, #e0e7ff, #c7d2fe, #a5b4fc);
+}
+
+.word-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.hint-pic {
+    font-size: 5rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.incomplete-word {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--primary);
+    letter-spacing: 10px;
+    background: #fff;
+    padding: 15px 40px;
+    border-radius: 12px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.text-option {
+    font-size: 2rem !important;
+}

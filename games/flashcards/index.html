@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>បណ្ណពាក្យ - Flashcards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../fast_math/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container" style="max-width: 600px;">
+        <header class="app-header">
+            <a href="../../index.html" class="btn-back">⬅️ ត្រលប់ក្រោយ (Back)</a>
+            <h1 style="color: #06b6d4;">បណ្ណពាក្យ 📇</h1>
+            <p>ចុចលើកាតដើម្បីមើលចម្លើយ (Flip to see answer)</p>
+        </header>
+
+        <main class="flashcard-area">
+            <div class="progress">កាតទី: <span id="current-idx">1</span> / <span id="total-idx">10</span></div>
+            
+            <div class="flashcard" id="flashcard">
+                <div class="flashcard-inner" id="flashcard-inner">
+                    <div class="flashcard-front">
+                        <span id="card-front-text">?</span>
+                    </div>
+                    <div class="flashcard-back">
+                        <span id="card-back-text">?</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="btn-prev" class="btn-large" style="background: #94a3b8;">⬅️ ថយក្រោយ (Prev)</button>
+                <button id="btn-next" class="btn-large" style="background: #06b6d4;">បន្ទាប់ ➡️ (Next)</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+<script src="../../js/confetti.min.js"></script>
+<script src="../../js/audio.js"></script>
+</body>
+</html>

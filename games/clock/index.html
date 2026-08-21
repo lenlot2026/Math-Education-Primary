@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ល្បែងទាយម៉ោង - Clock Reading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../fast_math/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="btn-back">⬅️ ត្រលប់ក្រោយ (Back)</a>
+            <h1 style="color: #f59e0b;">ល្បែងទាយម៉ោង ⏰</h1>
+            <p>តើនាឡិកានេះចង្អុលម៉ោងប៉ុន្មាន?</p>
+        </header>
+
+        <main class="game-area">
+            <div class="status-bar">
+                <div class="score">ពិន្ទុ: <span id="score">០</span></div>
+                <div class="timer">សំណួរទី: <span id="question-num">១</span>/១០</div>
+            </div>
+
+            <div id="start-screen" class="screen active">
+                <button id="btn-start" class="btn-large" style="background: #f59e0b;">ចាប់ផ្តើមលេង (Start)</button>
+            </div>
+
+            <div id="play-screen" class="screen">
+                <div class="clock-container">
+                    <svg id="clock-svg" viewBox="0 0 200 200" width="200" height="200">
+                        <!-- Clock Face -->
+                        <circle cx="100" cy="100" r="95" fill="white" stroke="#f59e0b" stroke-width="5" />
+                        <!-- Hour markers will be added by JS -->
+                        <g id="clock-markers"></g>
+                        <!-- Hands -->
+                        <line id="hour-hand" x1="100" y1="100" x2="100" y2="50" stroke="#1e293b" stroke-width="6" stroke-linecap="round" />
+                        <line id="minute-hand" x1="100" y1="100" x2="100" y2="20" stroke="#f43f5e" stroke-width="4" stroke-linecap="round" />
+                        <!-- Center dot -->
+                        <circle cx="100" cy="100" r="6" fill="#1e293b" />
+                    </svg>
+                </div>
+                
+                <div class="options-grid">
+                    <button class="option-btn text-option" data-index="0">12:00</button>
+                    <button class="option-btn text-option" data-index="1">1:00</button>
+                    <button class="option-btn text-option" data-index="2">2:00</button>
+                    <button class="option-btn text-option" data-index="3">3:00</button>
+                </div>
+            </div>
+
+            <div id="end-screen" class="screen">
+                <h2 style="color: #f59e0b;">លេងចប់ហើយ!</h2>
+                <p>ពិន្ទុរបស់អ្នកគឺ៖ <span id="final-score">០</span> / ១០</p>
+                <button id="btn-restart" class="btn-large" style="background: #f59e0b;">លេងម្តងទៀត</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+<script src="../../js/confetti.min.js"></script>
+<script src="../../js/audio.js"></script>
+</body>
+</html>

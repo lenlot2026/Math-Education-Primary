@@ -1,0 +1,18 @@
+/* Overrides for Picture Matching Game */
+:root {
+    --primary: #10b981; /* Emerald */
+    --secondary: #f59e0b;
+    --bg-gradient: linear-gradient(135deg, #d1fae5, #a7f3d0, #6ee7b7);
+}
+
+.picture-box {
+    font-size: 8rem;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+}
+
+.text-option {
+    font-size: 1.5rem !important;
+}

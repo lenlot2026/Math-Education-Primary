@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>រៀបសិស្សជាក្រុម - Group Maker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../fast_math/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container" style="max-width: 900px;">
+        <header class="app-header">
+            <a href="../../index.html" class="btn-back">⬅️ ត្រលប់ក្រោយ (Back)</a>
+            <h1 style="color: #8b5cf6;">រៀបសិស្សជាក្រុម 👥</h1>
+            <p>បែងចែកសិស្សជាក្រុមដោយស្វ័យប្រវត្តិ និងយុត្តិធម៌</p>
+        </header>
+
+        <main class="group-maker-area">
+            <div class="input-section">
+                <h3>បញ្ជូលឈ្មោះសិស្ស (១ឈ្មោះក្នុង១បន្ទាត់)</h3>
+                <textarea id="names-input" rows="12">សុខា
+បូរមី
+ពិសិដ្ឋ
+រតនា
+ចាន់ណា
+វិចិត្រ
+លីដា
+សំណាង
+ដារ៉ា
+ចិន្តា
+វុទ្ធី
+ស្រីនាង</textarea>
+                
+                <div class="settings">
+                    <label>ចែកជាប៉ុន្មានក្រុម? (Number of Groups):</label>
+                    <input type="number" id="num-groups" value="3" min="2" max="20">
+                </div>
+
+                <button id="btn-generate" class="btn-large" style="background: #8b5cf6;">បង្កើតក្រុម (Generate Groups)</button>
+            </div>
+            
+            <div class="output-section">
+                <h3>លទ្ធផលការបែងចែកក្រុម៖</h3>
+                <div id="groups-container" class="groups-grid">
+                    <!-- Groups will be generated here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+<script src="../../js/confetti.min.js"></script>
+<script src="../../js/audio.js"></script>
+</body>
+</html>

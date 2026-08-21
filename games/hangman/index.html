@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ល្បែងទាយពាក្យ - Word Guessing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../fast_math/style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <a href="../../index.html" class="btn-back">⬅️ ត្រលប់ក្រោយ (Back)</a>
+            <h1 style="color: #6366f1;">ទាយអក្សរបំពេញពាក្យ 📝</h1>
+            <p>ជ្រើសរើសអក្សរដែលបាត់ដើម្បីបំពេញពាក្យឱ្យបានត្រឹមត្រូវ</p>
+        </header>
+
+        <main class="game-area">
+            <div class="status-bar">
+                <div class="score">ពិន្ទុ: <span id="score">០</span></div>
+                <div class="timer">សំណួរទី: <span id="question-num">១</span>/១០</div>
+            </div>
+
+            <div id="start-screen" class="screen active">
+                <button id="btn-start" class="btn-large" style="background: #6366f1;">ចាប់ផ្តើមលេង (Start)</button>
+            </div>
+
+            <div id="play-screen" class="screen">
+                <div class="word-box">
+                    <div id="hint-pic" class="hint-pic">?</div>
+                    <div id="incomplete-word" class="incomplete-word">_ _ _</div>
+                </div>
+                
+                <div class="options-grid">
+                    <button class="option-btn text-option" data-index="0">?</button>
+                    <button class="option-btn text-option" data-index="1">?</button>
+                    <button class="option-btn text-option" data-index="2">?</button>
+                    <button class="option-btn text-option" data-index="3">?</button>
+                </div>
+            </div>
+
+            <div id="end-screen" class="screen">
+                <h2 style="color: #6366f1;">លេងចប់ហើយ!</h2>
+                <p>ពិន្ទុរបស់អ្នកគឺ៖ <span id="final-score">០</span> / ១០</p>
+                <button id="btn-restart" class="btn-large" style="background: #6366f1;">លេងម្តងទៀត</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+<script src="../../js/confetti.min.js"></script>
+<script src="../../js/audio.js"></script>
+</body>
+</html>
